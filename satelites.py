@@ -55,7 +55,7 @@ Star_Finder = DAOStarFinder(threshold=1.*med_ceu, fwhm=12.)
 # Encontrando as posicoes e os fluxos das estrelas 
 sources = Star_Finder(data)
 
-# Salvando a imagem em .png com as estrelas detectadas em amarelo
+# Salvando a imagem em .png com as estrelas detectadas em vermelho
 fig, ax = plt.subplots(figsize=(10, 10))
 im = ax.imshow(data, cmap='gray', origin='lower', vmin=np.percentile(data, 5), vmax=np.percentile(data, 95))
 divider = make_axes_locatable(ax)
@@ -66,5 +66,5 @@ ax.set_xlabel('X')
 ax.set_ylabel('Y')
 plt.savefig(str(image) + '.png')
 
-# Salvar as posições das estrelas encontradas
+# Salvando as posições das estrelas encontradas
 sources.write('estrelas.csv', format='csv', overwrite=True)
