@@ -21,19 +21,19 @@ Programa para identificação de posição x,y de satélites ("imagem traço") e
   - Fornecer as posições relatvas x,y <-> RA,DEC
 
 # Tarefas:
-29/02- Criação GIT, Verificar ferramentas do python (astropy, numpy, etc) para realizar as tarefas  (1) e (2)
+29/01- Criação GIT, Verificar ferramentas do python (astropy, numpy, etc) para realizar as tarefas  (1) e (2)
 
-05/03- Discussão e implementação da tarefa (1) com as ferramentas encontradas
+05/02- Discussão e implementação da tarefa (1) com as ferramentas encontradas
 12/03- Testes e verificação
-19/03- Discussão e implementação da tarefa (2) com as ferramentas encontradas
-26/03- Testes e verificação
+19/02- Discussão e implementação da tarefa (2) com as ferramentas encontradas
+26/02- Testes e verificação
 
-04/04- Discussão de ferramentas e procedimentos para as tarefas (3.1) e (3.2)
-11/04- Implementação das tarefas (3.1) e (3.2)
-18/04- Testes e verificação
-25/04- Implementação da tarefa (3) completa
+04/03- Discussão de ferramentas e procedimentos para as tarefas (3.1) e (3.2)
+11/03- Implementação das tarefas (3.1) e (3.2)
+18/03- Testes e verificação
+25/03- Implementação da tarefa (3) completa
 
-01/05- Testes e verificação
-08/05- Discussão e determinação de erros e incertezas
-15/05- Validação
-22/05- Entrega do programa
+01/04- Testes e verificação
+08/04- Discussão e determinação de erros e incertezas
+15/04- Validação
+22/04- Entrega do programa
