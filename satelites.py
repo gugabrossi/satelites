@@ -19,10 +19,14 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 # Declarando a imagem .fits
 image = '/home/tiago/Documents/GitHub/satelites/Capture_1.fits'
 
-#Coordenadas do fundo de ceu 
+# Coordenadas do fundo de ceu 
 x = 1497
 y = 1025.25
 raio = 4.
+
+# Star filter
+Lower_peak = 30.
+Upper_peak = 70.
 
 #####################################
 #           Codigo                  #
@@ -49,22 +53,30 @@ circ = np.where(np.sqrt((i-x)*(i-x)+(j-y)*(j-y)) < raio)
 # Mediana do ceu
 med_ceu = np.median(data[circ])
 
-# Configurando a funcao DAOStarFinder para encontrar estrelas
-Star_Finder = DAOStarFinder(threshold=1.*med_ceu, fwhm=12.)
+# Configurando a função DAOStarFinder para encontrar estrelas
+Star_Finder = DAOStarFinder(threshold=5.*dpm, fwhm=3., sky = med_ceu)
 
 # Encontrando as posicoes e os fluxos das estrelas 
 sources = Star_Finder(data)
+
+# Criando um filtro conforme a porcentagem do pico inserida pelo usuario
+peak_values = sources['peak']
+lower_peak_value = np.percentile(peak_values, Lower_peak)
+upper_peak_value = np.percentile(peak_values, Upper_peak)
+
+# Filtro para um pico minimo e maximo das estrelas
+selected_star = sources[(sources['peak'] > lower_peak_value) & (sources['peak'] < upper_peak_value)]
 
 # Salvando a imagem em .png com as estrelas detectadas em vermelho
 fig, ax = plt.subplots(figsize=(10, 10))
 im = ax.imshow(data, cmap='gray', origin='lower', vmin=np.percentile(data, 5), vmax=np.percentile(data, 95))
 divider = make_axes_locatable(ax)
-cax = divider.append_axes("bottom", size="5%", pad=0.5)
+cax = divider.append_axes("bottom", size="5%", pad=0.5)  
 plt.colorbar(im, cax=cax, orientation='horizontal', label='Contagem')
-ax.scatter(sources['xcentroid'], sources['ycentroid'], s=0.5, color='red')
+ax.scatter(selected_star['xcentroid'], selected_star['ycentroid'], s=1., color='red')
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
-plt.savefig(str(image) + '.png')
+plt.savefig(image.replace('.fits', '') + '_stars.png')
 
 # Salvando as posições das estrelas encontradas
-sources.write('estrelas.csv', format='csv', overwrite=True)
+selected_star.write(image.replace('.fits', '') + '_stars.csv', format='csv', overwrite=True)
